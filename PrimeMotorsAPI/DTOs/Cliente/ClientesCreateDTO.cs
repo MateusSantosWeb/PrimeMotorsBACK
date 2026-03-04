@@ -19,6 +19,5 @@ public class ClientesCreateDTO
     
     public string? Endereco { get; set; }
     
-    public DateTime Data_Cadastro { get; set; }
     
 }

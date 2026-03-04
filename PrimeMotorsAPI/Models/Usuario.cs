@@ -10,5 +10,4 @@ public class Usuario
     public string SenhaHash { get; set; }  = string.Empty;
     
     public virtual ICollection<UsuarioToken> Tokens { get; set; } = new List<UsuarioToken>();
-    
 }

@@ -15,7 +15,6 @@ public class Register
     [DataType(DataType.Password)]
     public string Senha { get; set; } = string.Empty;
     
-    [Required]
-    [DataType(DataType.Password)]
+    [Compare("Senha", ErrorMessage = "As senhas não conferem")]
     public string ConfirmaSenha { get; set; } = string.Empty;
 }

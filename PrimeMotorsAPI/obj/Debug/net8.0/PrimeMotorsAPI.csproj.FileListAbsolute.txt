@@ -144,3 +144,10 @@
 /home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/obj/Debug/net8.0/PrimeMotorsAPI.pdb
 /home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/obj/Debug/net8.0/PrimeMotorsAPI.genruntimeconfig.cache
 /home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/obj/Debug/net8.0/ref/PrimeMotorsAPI.dll
+/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/bin/Debug/net8.0/MySqlConnector.dll
+/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.dll
+/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/obj/Debug/net8.0/PrimeMotorsAPI.MvcApplicationPartsAssemblyInfo.cs
+/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/bin/Debug/net8.0/Microsoft.OpenApi.dll
+/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll

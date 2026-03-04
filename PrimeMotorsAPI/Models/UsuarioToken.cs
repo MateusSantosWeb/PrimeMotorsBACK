@@ -10,7 +10,7 @@ namespace PrimeMotorsAPI.Models
         public int Id { get; set; }
         
         [Required]
-        public string Token { get; set; }
+        public string Token { get; set; } = string.Empty;
         
         public bool IsRevoked { get; set; }
         public bool IsUsed { get; set; }
@@ -19,7 +19,7 @@ namespace PrimeMotorsAPI.Models
         public int UsuarioId { get; set; }
         
         [ForeignKey("UsuarioId")]
-        public virtual LoginDTO Usuario { get; set; }
+        public virtual Usuario Usuario { get; set; } 
     }
 }
 
