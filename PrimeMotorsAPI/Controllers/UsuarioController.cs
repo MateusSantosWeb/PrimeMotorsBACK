@@ -25,4 +25,17 @@ public class UsuarioController : ControllerBase
         return Ok(resultado);
     }
 
+    [HttpPost("Login")]
+    public async Task<IActionResult> Login([FromBody] LoginDTO dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var resultado = await _usuarioService.AutenticarAsync(dto);
+        if (resultado == null)
+            return Unauthorized("Email ou senha inválidos");
+
+        return Ok(resultado);
+    }
+
 }

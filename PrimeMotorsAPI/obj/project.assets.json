@@ -4285,11 +4285,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/PrimeMotorsAPI.csproj",
+      "projectUniqueName": "/home/mateus.santos@toshyro.local/Downloads/PrimeMotorsBack-API/PrimeMotorsAPI/PrimeMotorsAPI.csproj",
       "projectName": "PrimeMotorsAPI",
-      "projectPath": "/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/PrimeMotorsAPI.csproj",
+      "projectPath": "/home/mateus.santos@toshyro.local/Downloads/PrimeMotorsBack-API/PrimeMotorsAPI/PrimeMotorsAPI.csproj",
       "packagesPath": "/home/mateus.santos@toshyro.local/.nuget/packages/",
-      "outputPath": "/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/obj/",
+      "outputPath": "/home/mateus.santos@toshyro.local/Downloads/PrimeMotorsBack-API/PrimeMotorsAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/mateus.santos@toshyro.local/.nuget/NuGet/NuGet.Config"

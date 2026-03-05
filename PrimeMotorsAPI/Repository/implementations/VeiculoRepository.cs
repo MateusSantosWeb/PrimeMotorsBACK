@@ -14,6 +14,11 @@ public class VeiculoRepository : IVeiculoRepository
         _context = context;
     }
 
+    public async Task<List<Veiculo>> GetAllAsync()
+    {
+        return await _context.Veiculos.ToListAsync();
+    }
+
     public async Task<Veiculo?> GetByIdAsync(int id)
     {
         return await _context.Veiculos.FirstOrDefaultAsync(v => v.Id == id);
@@ -29,6 +34,12 @@ public class VeiculoRepository : IVeiculoRepository
     {
         _context.Veiculos.Update(veiculo);
         return Task.FromResult(veiculo);
+    }
+
+    public Task DeleteAsync(Veiculo veiculo)
+    {
+        _context.Veiculos.Remove(veiculo);
+        return Task.CompletedTask;
     }
 
     public async Task SaveChangesAsync()

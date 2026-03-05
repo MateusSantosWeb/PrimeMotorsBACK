@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PrimeMotorsAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d8eb64728d2aa5632727b3106cb35117cdf3ee59")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+084bc2fe2c9767508314fc8c2e8fb5e7a2914a09")]
 [assembly: System.Reflection.AssemblyProductAttribute("PrimeMotorsAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PrimeMotorsAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

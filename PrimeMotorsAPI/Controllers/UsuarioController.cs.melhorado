@@ -1,0 +1,130 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using PrimeMotorsAPI.DTOs;
+using PrimeMotorsAPI.Services;
+using System.Security.Claims;
+
+namespace PrimeMotorsAPI.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class UsuarioController : ControllerBase
+{
+    private readonly UsuarioService _usuarioService;
+    
+    public UsuarioController(UsuarioService usuarioService)
+    {
+        _usuarioService = usuarioService;
+    }
+
+    /// <summary>
+    /// Registrar novo usuário
+    /// </summary>
+    [HttpPost("register")]
+    public async Task<IActionResult> Registrar([FromBody] RegisterDTO dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var resultado = await _usuarioService.CriarUsuarioAsync(dto);
+        
+        if (resultado.Contains("Já cadastrado") || resultado.Contains("ja Cadastrado"))
+            return BadRequest(new { message = "Email já cadastrado" });
+        
+        return Ok(new { message = resultado });
+    }
+
+    /// <summary>
+    /// Fazer login e obter token JWT
+    /// </summary>
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginDTO dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var resultado = await _usuarioService.AutenticarAsync(dto);
+        
+        if (resultado == null)
+            return Unauthorized(new { message = "Email ou senha inválidos" });
+        
+        return Ok(resultado);
+    }
+
+    /// <summary>
+    /// Obter informações do usuário autenticado
+    /// </summary>
+    [HttpGet("me")]
+    [Authorize]
+    public async Task<IActionResult> ObterMeuPerfil()
+    {
+        var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+        
+        if (string.IsNullOrEmpty(emailClaim))
+            return Unauthorized();
+
+        var usuario = await _usuarioService.ObterPorEmailAsync(emailClaim);
+        
+        if (usuario == null)
+            return NotFound();
+
+        return Ok(usuario);
+    }
+
+    /// <summary>
+    /// Atualizar perfil do usuário
+    /// </summary>
+    [HttpPut("perfil")]
+    [Authorize]
+    public async Task<IActionResult> AtualizarPerfil([FromBody] AtualizarPerfilDTO dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+        
+        if (string.IsNullOrEmpty(emailClaim))
+            return Unauthorized();
+
+        var resultado = await _usuarioService.AtualizarPerfilAsync(emailClaim, dto);
+        
+        if (!resultado)
+            return BadRequest(new { message = "Erro ao atualizar perfil" });
+
+        return Ok(new { message = "Perfil atualizado com sucesso" });
+    }
+
+    /// <summary>
+    /// Alterar senha
+    /// </summary>
+    [HttpPost("alterar-senha")]
+    [Authorize]
+    public async Task<IActionResult> AlterarSenha([FromBody] AlterarSenhaDTO dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+        
+        if (string.IsNullOrEmpty(emailClaim))
+            return Unauthorized();
+
+        var resultado = await _usuarioService.AlterarSenhaAsync(emailClaim, dto);
+        
+        if (!resultado)
+            return BadRequest(new { message = "Senha atual inválida" });
+
+        return Ok(new { message = "Senha alterada com sucesso" });
+    }
+
+    /// <summary>
+    /// Listar todos os usuários (apenas admin)
+    /// </summary>
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> ListarUsuarios()
+    {
+        var usuarios = await _usuarioService.ListarTodosAsync();
+        return Ok(usuarios);
+    }
+}

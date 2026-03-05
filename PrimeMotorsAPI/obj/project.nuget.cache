@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IxUz0AymVys=",
+  "dgSpecHash": "Bgk2jicZ1nNHwiDJ+qAPTb/nOlFUHyiDVIGIOa9dnH1EEkp8JYdMxzLwcxuiOzBCTCrW/IHvZPXdAVROlUmv6w==",
   "success": true,
-  "projectFilePath": "/home/mateus.santos@toshyro.local/RiderProjects/PrimeMotors/PrimeMotorsAPI/PrimeMotorsAPI.csproj",
+  "projectFilePath": "/home/mateus.santos@toshyro.local/Downloads/PrimeMotorsBack-API/PrimeMotorsAPI/PrimeMotorsAPI.csproj",
   "expectedPackageFiles": [
     "/home/mateus.santos@toshyro.local/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/home/mateus.santos@toshyro.local/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",

@@ -1,0 +1,145 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using PrimeMotorsAPI.DTOs;
+using PrimeMotorsAPI.Services;
+
+namespace PrimeMotorsAPI.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class VeiculoController : ControllerBase
+{
+    private readonly VeiculoService _veiculoService;
+    
+    public VeiculoController(VeiculoService veiculo)
+    {
+        _veiculoService = veiculo;
+    }
+
+    /// <summary>
+    /// Listar todos os veículos
+    /// </summary>
+    [HttpGet]
+    public async Task<IActionResult> Listar()
+    {
+        var veiculos = await _veiculoService.ListarTodosAsync();
+        return Ok(veiculos);
+    }
+
+    /// <summary>
+    /// Obter veículo por ID
+    /// </summary>
+    [HttpGet("{id}")]
+    public async Task<IActionResult> ObterPorId(int id)
+    {
+        var veiculo = await _veiculoService.ObterPorIdAsync(id);
+        
+        if (veiculo == null)
+            return NotFound(new { message = "Veículo não encontrado" });
+
+        return Ok(veiculo);
+    }
+
+    /// <summary>
+    /// Listar veículos disponíveis
+    /// </summary>
+    [HttpGet("filtro/disponiveis")]
+    public async Task<IActionResult> ListarDisponiveis()
+    {
+        var veiculos = await _veiculoService.ListarDisponiveisAsync();
+        return Ok(veiculos);
+    }
+
+    /// <summary>
+    /// Filtrar veículos por marca
+    /// </summary>
+    [HttpGet("filtro/marca/{marca}")]
+    public async Task<IActionResult> FiltrarPorMarca(string marca)
+    {
+        var veiculos = await _veiculoService.FiltrarPorMarcaAsync(marca);
+        return Ok(veiculos);
+    }
+
+    /// <summary>
+    /// Filtrar veículos por faixa de preço
+    /// </summary>
+    [HttpGet("filtro/preco")]
+    public async Task<IActionResult> FiltrarPorPreco([FromQuery] decimal precoMin, [FromQuery] decimal precoMax)
+    {
+        var veiculos = await _veiculoService.FiltrarPorPrecoAsync(precoMin, precoMax);
+        return Ok(veiculos);
+    }
+
+    /// <summary>
+    /// Criar novo veículo (requer autenticação)
+    /// </summary>
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> Criar([FromBody] VeiculoCreateDTO dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var resultado = await _veiculoService.CriarVeiculoAsync(dto);
+        return CreatedAtAction(nameof(ObterPorId), new { id = resultado.Id }, resultado);
+    }
+
+    /// <summary>
+    /// Atualizar veículo (requer autenticação)
+    /// </summary>
+    [HttpPut("{id}")]
+    [Authorize]
+    public async Task<IActionResult> Atualizar(int id, [FromBody] VeiculoUpdateDTO dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var resultado = await _veiculoService.AtualizarVeiculoAsync(id, dto);
+        
+        if (resultado == null)
+            return NotFound(new { message = "Veículo não encontrado" });
+
+        return Ok(resultado);
+    }
+
+    /// <summary>
+    /// Deletar veículo (requer autenticação)
+    /// </summary>
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<IActionResult> Deletar(int id)
+    {
+        var resultado = await _veiculoService.DeletarVeiculoAsync(id);
+        
+        if (!resultado)
+            return NotFound(new { message = "Veículo não encontrado" });
+
+        return Ok(new { message = "Veículo deletado com sucesso" });
+    }
+
+    /// <summary>
+    /// Marcar veículo como vendido
+    /// </summary>
+    [HttpPatch("{id}/marcar-vendido")]
+    [Authorize]
+    public async Task<IActionResult> MarcarVendido(int id)
+    {
+        var resultado = await _veiculoService.MarcarComoVendidoAsync(id);
+        
+        if (!resultado)
+            return NotFound(new { message = "Veículo não encontrado" });
+
+        return Ok(new { message = "Veículo marcado como vendido" });
+    }
+
+    /// <summary>
+    /// Obter estatísticas de veículos
+    /// </summary>
+    [HttpGet("stats/resumo")]
+    [Authorize]
+    public async Task<IActionResult> ObterEstatisticas()
+    {
+        var stats = await _veiculoService.ObterEstatisticasAsync();
+        return Ok(stats);
+    }
+}
